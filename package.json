@@ -1,11 +1,8 @@
 {
-  "name": "cs-complaint-hub-frontend",
+  "name": "cs-complaint-hub",
   "version": "1.0.0",
   "private": true,
-  "description": "A frontend-only demonstration of the CS Department Complaint Hub application.",
-  "scripts": {
-    "//": "Backend scripts removed. This is now a frontend-only project."
-  },
+  "description": "A fully frontend-only, responsive web-based system for Computer Science students to submit, track, and resolve their complaints.",
   "author": "Igboeche Johnfavour Ikenna",
   "license": "ISC"
 }
