@@ -1,5 +1,7 @@
 
 
+
+
 import React, { useState, useEffect, useCallback } from 'react';
 import { Complaint, ComplaintCategory, ComplaintAttachment } from '../types';
 import { XMarkIcon, DocumentIcon, PaperClipIcon } from './icons';
@@ -129,7 +131,9 @@ const ComplaintFormModal: React.FC<ComplaintFormModalProps> = ({ isOpen, onClose
             </select>
           </div>
           <div>
-            <label htmlFor="description" className="block text-sm font-medium text-gray-700">Detailed Description</label>
+            <div className="flex justify-between items-center">
+                <label htmlFor="description" className="block text-sm font-medium text-gray-700">Detailed Description</label>
+            </div>
             <textarea
               id="description"
               rows={6}

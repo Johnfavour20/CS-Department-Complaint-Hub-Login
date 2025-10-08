@@ -1,5 +1,3 @@
-
-
 import React, { useState } from 'react';
 import { Complaint, ComplaintStatus, ComplaintCategory } from '../types';
 // FIX: Added DocumentIcon to the import list to resolve reference error.
@@ -18,7 +16,8 @@ const statusStyles: { [key in ComplaintStatus]: { bg: string; text: string; bord
   [ComplaintStatus.CLOSED]: { bg: 'bg-gray-100', text: 'text-gray-800', border: 'border-gray-400' },
 };
 
-const categoryIcons: { [key in ComplaintCategory]: JSX.Element } = {
+// FIX: Changed JSX.Element to React.ReactElement to resolve namespace error.
+const categoryIcons: { [key in ComplaintCategory]: React.ReactElement } = {
     [ComplaintCategory.ACADEMIC]: <AcademicCapIcon className="w-5 h-5" />,
     [ComplaintCategory.ADMINISTRATIVE]: <BuildingOfficeIcon className="w-5 h-5" />,
     [ComplaintCategory.FACILITIES]: <WrenchScrewdriverIcon className="w-5 h-5" />,

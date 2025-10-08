@@ -114,7 +114,8 @@ const LandingPage: React.FC = () => {
   );
 };
 
-const TabButton: React.FC<{title: string, icon: JSX.Element, isActive: boolean, onClick: () => void}> = ({title, icon, isActive, onClick}) => (
+// FIX: Changed JSX.Element to React.ReactElement to resolve namespace error.
+const TabButton: React.FC<{title: string, icon: React.ReactElement, isActive: boolean, onClick: () => void}> = ({title, icon, isActive, onClick}) => (
     <button onClick={onClick} className={`flex-1 flex justify-center items-center py-3 px-4 font-semibold text-lg border-b-2 transition-colors ${isActive ? 'border-brand-primary text-brand-primary' : 'border-transparent text-gray-500 hover:text-brand-primary'}`}>
         {icon} {title}
     </button>

@@ -317,7 +317,8 @@ const AnalyticsView: React.FC<{ complaints: Complaint[] }> = ({ complaints }) =>
     )
 }
 
-const TabButton: React.FC<{ label: string; icon: JSX.Element; isActive: boolean; onClick: () => void }> = ({ label, icon, isActive, onClick }) => (
+// FIX: Changed JSX.Element to React.ReactElement to resolve namespace error.
+const TabButton: React.FC<{ label: string; icon: React.ReactElement; isActive: boolean; onClick: () => void }> = ({ label, icon, isActive, onClick }) => (
     <button
         onClick={onClick}
         className={`flex items-center space-x-2 py-3 px-4 font-semibold transition-colors duration-300 ${
@@ -329,7 +330,8 @@ const TabButton: React.FC<{ label: string; icon: JSX.Element; isActive: boolean;
     </button>
 );
 
-const StatCard: React.FC<{title: string, value: number, icon: JSX.Element, color: string}> = ({title, value, icon, color}) => (
+// FIX: Changed JSX.Element to React.ReactElement to resolve namespace error.
+const StatCard: React.FC<{title: string, value: number, icon: React.ReactElement, color: string}> = ({title, value, icon, color}) => (
     <div className="bg-white p-5 rounded-xl shadow-lg border border-gray-200 flex items-center space-x-4">
         <div className={`p-3 rounded-full text-white ${color}`}>
             {icon}
