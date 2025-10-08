@@ -4,5 +4,9 @@
   "private": true,
   "description": "A fully frontend-only, responsive web-based system for Computer Science students to submit, track, and resolve their complaints.",
   "author": "Igboeche Johnfavour Ikenna",
-  "license": "ISC"
+  "license": "ISC",
+  "scripts": {
+    "start": "serve",
+    "build": "echo \"No build step required. Files are served directly.\" && exit 0"
+  }
 }
