@@ -1,18 +1,18 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import { Complaint, ComplaintStatus, ComplaintCategory } from '../types';
 import ComplaintCard from './ComplaintCard';
-import { ChartBarIcon, DocumentTextIcon, CheckCircleIcon, ClockIcon, ArrowPathIcon, MagnifyingGlassIcon, UserIcon } from './icons';
+import { DocumentTextIcon, MagnifyingGlassIcon, UserIcon, Cog6ToothIcon } from './icons';
 import { useComplaints } from '../contexts/ComplaintContext';
 import { useNotification } from '../contexts/NotificationContext';
 import ComplaintDetailModal from './ComplaintDetailModal';
 import { findUserById } from '../utils/userData';
 import ProfileView from './ProfileView';
+import ReportsView from './ReportsView';
 
 const AdminDashboard: React.FC = () => {
   const { complaints, dispatch } = useComplaints();
   const { showNotification } = useNotification();
-  const [activeTab, setActiveTab] = useState<'complaints' | 'analytics' | 'profile'>('complaints');
+  const [activeTab, setActiveTab] = useState<'complaints' | 'reports' | 'profile'>('complaints');
   const [filter, setFilter] = useState<ComplaintStatus | 'ALL'>('ALL');
   const [categoryFilter, setCategoryFilter] = useState<ComplaintCategory | 'ALL'>('ALL');
   const [searchTerm, setSearchTerm] = useState('');
@@ -148,19 +148,19 @@ const AdminDashboard: React.FC = () => {
         <h2 className="text-3xl font-bold text-brand-primary">Administrator Dashboard</h2>
       </div>
 
-      <div className="mb-6">
+      <div className="mb-6 print:hidden">
         <div className="flex space-x-2 border-b-2 border-gray-200">
           <TabButton
             label="Manage Complaints"
-            icon={<DocumentTextIcon className="w-5 h-5"/>}
+            icon={<Cog6ToothIcon className="w-5 h-5"/>}
             isActive={activeTab === 'complaints'}
             onClick={() => setActiveTab('complaints')}
           />
           <TabButton
-            label="Analytics"
-            icon={<ChartBarIcon className="w-5 h-5"/>}
-            isActive={activeTab === 'analytics'}
-            onClick={() => setActiveTab('analytics')}
+            label="Reports"
+            icon={<DocumentTextIcon className="w-5 h-5"/>}
+            isActive={activeTab === 'reports'}
+            onClick={() => setActiveTab('reports')}
           />
           <TabButton
             label="My Profile"
@@ -223,7 +223,7 @@ const AdminDashboard: React.FC = () => {
             </div>
         </div>
       )}
-      {activeTab === 'analytics' && <AnalyticsView complaints={complaints} />}
+      {activeTab === 'reports' && <ReportsView />}
       {activeTab === 'profile' && <ProfileView />}
 
       {selectedComplaint && (
@@ -241,82 +241,6 @@ const AdminDashboard: React.FC = () => {
 };
 
 
-const AnalyticsView: React.FC<{ complaints: Complaint[] }> = ({ complaints }) => {
-    const categoryData = useMemo(() => {
-        const counts = complaints.reduce((acc, c) => {
-            acc[c.category] = (acc[c.category] || 0) + 1;
-            return acc;
-        }, {} as Record<ComplaintCategory, number>);
-
-        return Object.entries(counts).map(([name, value]) => ({ name, count: value }));
-    }, [complaints]);
-
-    const statusData = useMemo(() => {
-        const counts = complaints.reduce((acc, c) => {
-            acc[c.status] = (acc[c.status] || 0) + 1;
-            return acc;
-        }, {} as Record<ComplaintStatus, number>);
-
-        return Object.entries(counts).map(([name, value]) => ({ name, value }));
-    }, [complaints]);
-    
-    const COLORS = {
-        [ComplaintStatus.SUBMITTED]: '#F58634',
-        [ComplaintStatus.IN_PROGRESS]: '#3B82F6',
-        [ComplaintStatus.RESOLVED]: '#10B981',
-        [ComplaintStatus.CLOSED]: '#6B7280',
-    };
-    
-    const summaryStats = {
-        total: complaints.length,
-        resolved: complaints.filter(c => c.status === ComplaintStatus.RESOLVED).length,
-        inProgress: complaints.filter(c => c.status === ComplaintStatus.IN_PROGRESS).length,
-        pending: complaints.filter(c => c.status === ComplaintStatus.SUBMITTED).length,
-    }
-
-    return (
-        <div className="space-y-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <StatCard title="Total Complaints" value={summaryStats.total} icon={<DocumentTextIcon className="w-8 h-8"/>} color="bg-brand-primary" />
-                <StatCard title="Pending Review" value={summaryStats.pending} icon={<ClockIcon className="w-8 h-8"/>} color="bg-brand-secondary" />
-                <StatCard title="In Progress" value={summaryStats.inProgress} icon={<ArrowPathIcon className="w-8 h-8"/>} color="bg-blue-500" />
-                <StatCard title="Resolved" value={summaryStats.resolved} icon={<CheckCircleIcon className="w-8 h-8"/>} color="bg-green-500" />
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
-                <div className="lg:col-span-3 bg-white p-6 rounded-xl shadow-lg border border-gray-200">
-                    <h3 className="text-xl font-bold text-brand-primary mb-4">Complaints by Category</h3>
-                     <ResponsiveContainer width="100%" height={300}>
-                        <BarChart data={categoryData} margin={{ top: 5, right: 20, left: -10, bottom: 5 }}>
-                            <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                            <XAxis dataKey="name" tick={{ fontSize: 12 }} />
-                            <YAxis allowDecimals={false} />
-                            <Tooltip cursor={{fill: 'rgba(239, 246, 255, 0.5)'}} contentStyle={{ backgroundColor: 'white', border: '1px solid #ddd', borderRadius: '8px' }}/>
-                            <Legend />
-                            <Bar dataKey="count" fill="#F58634" name="Complaints" barSize={30} radius={[4, 4, 0, 0]} />
-                        </BarChart>
-                    </ResponsiveContainer>
-                </div>
-                <div className="lg:col-span-2 bg-white p-6 rounded-xl shadow-lg border border-gray-200">
-                    <h3 className="text-xl font-bold text-brand-primary mb-4">Complaints by Status</h3>
-                    <ResponsiveContainer width="100%" height={300}>
-                        <PieChart>
-                            {/* FIX: Explicitly cast percent to a number before performing arithmetic to prevent TypeScript errors. */}
-                            <Pie data={statusData} cx="50%" cy="50%" labelLine={false} outerRadius={100} fill="#8884d8" dataKey="value" nameKey="name" label={({ name, percent }) => `${name} ${((Number(percent) || 0) * 100).toFixed(0)}%`}>
-                                {statusData.map((entry, index) => (
-                                    <Cell key={`cell-${index}`} fill={COLORS[entry.name as ComplaintStatus]} />
-                                ))}
-                            </Pie>
-                            <Tooltip contentStyle={{ backgroundColor: 'white', border: '1px solid #ddd', borderRadius: '8px' }}/>
-                            <Legend/>
-                        </PieChart>
-                    </ResponsiveContainer>
-                </div>
-            </div>
-        </div>
-    )
-}
-
 // FIX: Changed JSX.Element to React.ReactElement to resolve namespace error.
 const TabButton: React.FC<{ label: string; icon: React.ReactElement; isActive: boolean; onClick: () => void }> = ({ label, icon, isActive, onClick }) => (
     <button
@@ -328,19 +252,6 @@ const TabButton: React.FC<{ label: string; icon: React.ReactElement; isActive: b
         {icon}
         <span>{label}</span>
     </button>
-);
-
-// FIX: Changed JSX.Element to React.ReactElement to resolve namespace error.
-const StatCard: React.FC<{title: string, value: number, icon: React.ReactElement, color: string}> = ({title, value, icon, color}) => (
-    <div className="bg-white p-5 rounded-xl shadow-lg border border-gray-200 flex items-center space-x-4">
-        <div className={`p-3 rounded-full text-white ${color}`}>
-            {icon}
-        </div>
-        <div>
-            <p className="text-gray-500 font-medium">{title}</p>
-            <p className="text-3xl font-bold text-brand-dark">{value}</p>
-        </div>
-    </div>
 );
 
 export default AdminDashboard;

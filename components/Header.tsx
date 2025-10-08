@@ -10,7 +10,7 @@ const Header: React.FC = () => {
     }
 
     return (
-        <header className="bg-white shadow-sm sticky top-0 z-10">
+        <header className="bg-white shadow-sm sticky top-0 z-10 print:hidden">
             <div className="container mx-auto px-4 py-2 flex justify-between items-center">
                 <div className="flex items-center space-x-4 cursor-pointer" onClick={handleLogoClick}>
                     <img src="https://cdn-icons-png.flaticon.com/512/613/613220.png" alt="CS Department Logo" className="h-12 w-auto" />

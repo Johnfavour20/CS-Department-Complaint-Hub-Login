@@ -1,7 +1,3 @@
-
-
-
-
 import React, { useState, useEffect, useCallback } from 'react';
 import { Complaint, ComplaintCategory, ComplaintAttachment } from '../types';
 import { XMarkIcon, DocumentIcon, PaperClipIcon } from './icons';
