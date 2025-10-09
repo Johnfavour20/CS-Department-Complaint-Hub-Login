@@ -1,9 +1,9 @@
 
 # CS Department Complaint Hub
 
-A sophisticated, fully-responsive, and feature-rich web application designed to streamline the complaint submission and resolution process for a university's Computer Science department. This project provides a transparent and efficient communication channel between students and administrators through dedicated, role-based dashboards.
+A sophisticated, fully-responsive, and feature-rich full-stack web application designed to streamline the complaint submission and resolution process for a university's Computer Science department. This project provides a transparent and efficient communication channel between students and administrators through dedicated, role-based dashboards.
 
-This is a comprehensive frontend-only demonstration built with **React** and **TypeScript**. It simulates a full-stack experience by using mock data and leveraging the browser's `localStorage` to ensure data persistence across sessions.
+The frontend is a comprehensive demonstration built with **React** and **TypeScript**, simulating a full-stack experience by using mock data and leveraging the browser's `localStorage` for data persistence. The backend architecture is designed with **Node.js**, **Express**, and **Prisma** to provide a robust and scalable foundation for future development.
 
 ---
 
@@ -17,6 +17,8 @@ This is a comprehensive frontend-only demonstration built with **React** and **T
 - [Technology Stack](#technology-stack)
 - [Project Structure](#project-structure)
 - [Getting Started](#getting-started)
+  - [Frontend Setup](#frontend-setup)
+  - [Backend Setup (Conceptual)](#backend-setup-conceptual)
 - [Login Credentials](#login-credentials)
 - [Programmer Information](#programmer-information)
 
@@ -53,7 +55,7 @@ The goal is to create a more responsive academic environment by:
 
 -   **Comprehensive Dashboard:** A central hub to view all student complaints, with clear indicators for unread submissions and overdue tasks.
 -   **KPI Analytics:** An "At a Glance" section displays key performance indicators: Total Open Complaints, New Submissions, Overdue Complaints, and Average Resolution Time.
---  **Advanced Filtering & Sorting:** Complaints can be filtered by status (e.g., `In Progress`) and category (`Academic`, `Facilities`, etc.) and sorted by date or status.
+-   **Advanced Filtering & Sorting:** Complaints can be filtered by status (e.g., `In Progress`) and category (`Academic`, `Facilities`, etc.) and sorted by date or status.
 -   **Powerful Search:** Search across all complaints by student name, ID, or keywords in the description.
 -   **Detailed Management Modal:** A dedicated modal for each complaint shows full student details, complaint history, and attached files.
 -   **Status & Due Date Management:** Easily update a complaint's status and set a due date to prioritize and track resolution timelines.
@@ -72,87 +74,129 @@ The goal is to create a more responsive academic environment by:
 
 ## Technology Stack
 
+### Frontend
 -   **Framework/Library:** [**React 19**](https://react.dev/) with [**TypeScript**](https://www.typescriptlang.org/) for building a scalable, type-safe, and component-based user interface.
 -   **AI Integration:** [**Google Gemini API (@google/genai)**](https://ai.google.dev/docs) for the AI Complaint Assistant and the real-time Live Voice Chat support.
 -   **Styling:** [**Tailwind CSS**](https://tailwindcss.com/) for a modern, utility-first CSS workflow that enables rapid and responsive UI development.
--   **State Management:** **React Context API** is used to manage global application state (Authentication, Complaints, Notifications) in a clean and efficient manner, avoiding the need for external state management libraries.
--   **Data Persistence:** Browser **`localStorage` API** acts as a lightweight client-side database, providing a persistent user experience across browser sessions.
--   **Icons:** A custom-built icon library using SVG components for a consistent and clean UI.
+-   **State Management:** **React Context API** is used to manage global application state (Authentication, Complaints, Notifications).
+-   **Data Persistence:** Browser **`localStorage` API** acts as a lightweight client-side database for the frontend-only demo.
+-   **Icons:** A custom-built icon library using SVG components.
 -   **Environment:** Zero-config setup. The application runs directly in the browser using ES Modules and `importmap`, requiring no build step.
+
+### Backend (Conceptual)
+-   **Runtime:** [**Node.js**](https://nodejs.org/) - A JavaScript runtime for building fast and scalable server-side applications.
+-   **Framework:** [**Express.js**](https://expressjs.com/) - A minimal and flexible Node.js web application framework.
+-   **Language:** [**TypeScript**](https://www.typescriptlang.org/) - For type safety and improved developer experience on the server.
+-   **Database:** [**PostgreSQL**](https://www.postgresql.org/) - A powerful, open-source object-relational database system.
+-   **ORM:** [**Prisma**](https://www.prisma.io/) - A next-generation ORM for Node.js and TypeScript that simplifies database access.
+-   **Authentication:** JWT (JSON Web Tokens) for securing API endpoints.
 
 ---
 
 ## Project Structure
 
-The project is organized into a modular and maintainable structure:
+The project is structured as a monorepo with a clear separation between the `client` and `server` directories.
 
 ```
 /
-├── components/           # Reusable React components that form the UI
-│   ├── AdminDashboard.tsx      # Main view for administrators
-│   ├── AIComplaintAssistant.tsx# Modal for AI-powered text generation
-│   ├── ComplaintCard.tsx       # Component to display a single complaint summary
-│   ├── ComplaintDetailModal.tsx # Modal for viewing and managing complaint details
-│   ├── ComplaintFormModal.tsx  # Modal for submitting a new complaint
-│   ├── Footer.tsx              # Application footer
-│   ├── Header.tsx              # Application header with user info
-│   ├── icons.tsx               # SVG icons used throughout the app
-│   ├── LandingPage.tsx         # Login page for students and admins
-│   ├── LiveChatModal.tsx       # Modal for real-time voice chat with AI
-│   ├── Notification.tsx        # Toast notification component
-│   ├── ProfileView.tsx         # User profile display and edit component
-│   ├── ReportsView.tsx         # View for generating and exporting reports
-│   ├── StatCard.tsx            # Reusable card for displaying KPIs
-│   └── StudentDashboard.tsx    # Main view for students
-├── contexts/             # React Context providers for global state management
-│   ├── AuthContext.tsx         # Manages user authentication state
-│   ├── ComplaintContext.tsx    # Manages the list of complaints
-│   └── NotificationContext.tsx # Manages system-wide notifications
-├── utils/                # Utility functions, helpers, and mock data
-│   ├── audioUtils.ts         # Helper functions for encoding/decoding audio
-│   ├── mockData.ts           # Initial set of mock complaints
-│   └── userData.ts           # Mock student and admin user data
-├── App.tsx               # Main application component, handles routing
-├── index.html            # The main HTML entry point for the application
-├── index.tsx             # React application root/entry point
-├── metadata.json         # Application metadata
-├── package.json          # Project metadata and dependencies
-├── readme.md             # This file
-└── types.ts              # Shared TypeScript types and enums
+├── client/                 # Contains the entire React frontend application
+│   ├── components/         # Reusable React components
+│   │   ├── AdminDashboard.tsx
+│   │   ├── ComplaintCard.tsx
+│   │   └── ...
+│   ├── contexts/           # React Context providers for global state
+│   │   ├── AuthContext.tsx
+│   │   └── ...
+│   ├── utils/              # Utility functions and mock data
+│   │   ├── mockData.ts
+│   │   └── ...
+│   ├── App.tsx             # Main application component
+│   ├── index.html          # HTML entry point for the client
+│   ├── index.tsx           # React application root
+│   ├── package.json
+│   └── tsconfig.json
+│
+├── server/                 # Contains the conceptual Node.js backend
+│   ├── prisma/             # Prisma schema and migration files
+│   │   └── schema.prisma
+│   ├── src/                # Backend source code
+│   │   ├── api/            # API routes (e.g., v1)
+│   │   ├── config/         # Environment variables, db config
+│   │   ├── controllers/    # Request handling logic
+│   │   ├── middleware/     # Custom middleware (auth, error handling)
+│   │   ├── models/         # (Alternative to Prisma) or data structures
+│   │   ├── services/       # Business logic layer
+│   │   └── server.ts       # Express server entry point
+│   ├── .env.example        # Example environment variables
+│   ├── package.json
+│   └── tsconfig.json
+│
+└── readme.md               # This file
 ```
 
 ---
 
 ## Getting Started
 
-This is a static, frontend-only application that runs entirely in the browser.
+### Frontend Setup
+
+The frontend is a static application that runs entirely in the browser.
 
 1.  **Clone the Repository**
     ```bash
     git clone <repository-url>
     ```
-2.  **Open the HTML File**
-    -   Navigate to the project directory.
+2.  **Navigate to the Client Directory**
+    ```bash
+    cd client
+    ```
+3.  **Open the HTML File**
     -   Open the `index.html` file directly in a modern web browser (like Chrome, Firefox, or Edge).
 
-Alternatively, you can use a simple local server for a more robust experience:
+Alternatively, you can use a simple local server:
 
 1.  **Install `serve` (if you don't have it):**
     ```bash
     npm install -g serve
     ```
 2.  **Run the Server:**
-    -   From the project's root directory, run:
+    -   From the `client` directory, run:
     ```bash
     serve .
     ```
     -   Open your browser and go to the local URL provided (usually `http://localhost:3000`).
 
+### Backend Setup (Conceptual)
+
+The following steps outline how to run the backend if it were implemented according to the project structure.
+
+1.  **Navigate to the Server Directory**
+    ```bash
+    cd server
+    ```
+2.  **Install Dependencies**
+    ```bash
+    npm install
+    ```
+3.  **Set Up Environment Variables**
+    -   Create a `.env` file by copying `.env.example`.
+    -   Fill in the required variables, such as `DATABASE_URL` and `JWT_SECRET`.
+4.  **Run Database Migrations**
+    -   This command will set up the database schema based on `prisma/schema.prisma`.
+    ```bash
+    npx prisma migrate dev
+    ```
+5.  **Start the Development Server**
+    ```bash
+    npm run dev
+    ```
+    -   The backend API would then be available at `http://localhost:5000` (or the configured port).
+
 ---
 
 ## Login Credentials
 
-Use the following credentials to access the different dashboards:
+Use the following credentials to access the different dashboards on the frontend demo:
 
 #### **Student Login**
 
