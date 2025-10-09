@@ -1,13 +1,14 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { Complaint, ComplaintStatus, ComplaintCategory } from '../types';
 import ComplaintCard from './ComplaintCard';
-import { DocumentTextIcon, MagnifyingGlassIcon, UserIcon, Cog6ToothIcon } from './icons';
+import { DocumentTextIcon, MagnifyingGlassIcon, UserIcon, Cog6ToothIcon, BellIcon, ExclamationTriangleIcon, ClockIcon } from './icons';
 import { useComplaints } from '../contexts/ComplaintContext';
 import { useNotification } from '../contexts/NotificationContext';
 import ComplaintDetailModal from './ComplaintDetailModal';
 import { findUserById } from '../utils/userData';
 import ProfileView from './ProfileView';
 import ReportsView from './ReportsView';
+import StatCard from './StatCard';
 
 const AdminDashboard: React.FC = () => {
   const { complaints, dispatch } = useComplaints();
@@ -103,6 +104,33 @@ const AdminDashboard: React.FC = () => {
     setSelectedComplaint(complaint);
   };
 
+  const stats = useMemo(() => {
+    const openComplaints = complaints.filter(c => c.status === ComplaintStatus.SUBMITTED || c.status === ComplaintStatus.IN_PROGRESS).length;
+    const newSubmissions = complaints.filter(c => !c.isReadByAdmin).length;
+    
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const overdue = complaints.filter(c =>
+      c.dueDate && new Date(c.dueDate) < today && c.status !== ComplaintStatus.RESOLVED && c.status !== ComplaintStatus.CLOSED
+    ).length;
+
+    const resolvedComplaints = complaints.filter(c => c.resolvedAt);
+    let avgResolutionTime = 'N/A';
+    if (resolvedComplaints.length > 0) {
+        const totalTime = resolvedComplaints.reduce((acc, c) => {
+            if (c.resolvedAt) { // type guard
+                return acc + (new Date(c.resolvedAt).getTime() - new Date(c.submittedAt).getTime());
+            }
+            return acc;
+        }, 0);
+        const avgMilliseconds = totalTime / resolvedComplaints.length;
+        const avgDays = avgMilliseconds / (1000 * 60 * 60 * 24);
+        avgResolutionTime = `${avgDays.toFixed(1)} days`;
+    }
+
+    return { openComplaints, newSubmissions, overdue, avgResolutionTime };
+  }, [complaints]);
+
   const filteredAndSortedComplaints = useMemo(() => {
     let processedComplaints = [...complaints];
 
@@ -173,6 +201,15 @@ const AdminDashboard: React.FC = () => {
 
       {activeTab === 'complaints' && (
         <div>
+            <div className="mb-8">
+                <h3 className="text-xl font-bold text-brand-dark mb-4">At a Glance</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <StatCard title="Total Open Complaints" value={stats.openComplaints} icon={<DocumentTextIcon />} />
+                    <StatCard title="New Submissions" value={stats.newSubmissions} icon={<BellIcon />} />
+                    <StatCard title="Overdue Complaints" value={stats.overdue} icon={<ExclamationTriangleIcon />} color={stats.overdue > 0 ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800'} />
+                    <StatCard title="Avg. Resolution Time" value={stats.avgResolutionTime} icon={<ClockIcon />} />
+                </div>
+            </div>
             <div className="bg-white p-4 rounded-lg shadow-sm border mb-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     <div className="relative">
