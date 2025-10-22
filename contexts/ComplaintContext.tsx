@@ -1,7 +1,7 @@
 
+
 import React, { createContext, useReducer, ReactNode, useEffect } from 'react';
 import { Complaint } from '../types';
-import { mockComplaints } from '../utils/mockData';
 
 type Action =
   | { type: 'SET_COMPLAINTS'; payload: Complaint[] }
@@ -33,7 +33,7 @@ const complaintsReducer = (state: Complaint[], action: Action): Complaint[] => {
 const LOCAL_STORAGE_KEY = 'csDepartmentComplaints';
 
 // This initializer function runs once when the reducer is created.
-// It loads the initial state from localStorage or falls back to mock data.
+// It loads the initial state from localStorage or falls back to an empty array.
 const initializer = (): Complaint[] => {
   try {
     const storedComplaints = localStorage.getItem(LOCAL_STORAGE_KEY);
@@ -53,13 +53,11 @@ const initializer = (): Complaint[] => {
     }
   } catch (error) {
     console.error("Failed to parse complaints from localStorage", error);
-    // If parsing fails, we'll fall through and use mock data.
+    // If parsing fails, we'll fall through and use an empty array.
   }
 
-  // If localStorage is empty or parsing failed, initialize with mock data
-  // and save it to localStorage for the next load.
-  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(mockComplaints));
-  return mockComplaints;
+  // If localStorage is empty or parsing failed, initialize with an empty array.
+  return [];
 };
 
 export const ComplaintProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
