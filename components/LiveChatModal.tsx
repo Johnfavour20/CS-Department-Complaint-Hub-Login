@@ -195,7 +195,7 @@ const LiveChatModal: React.FC<LiveChatModalProps> = ({ isOpen, onClose }) => {
                     responseModalities: [Modality.AUDIO],
                     inputAudioTranscription: {},
                     outputAudioTranscription: {},
-                    systemInstruction: `You are a friendly and helpful AI support agent for the university's Computer Science Department Complaint Hub. Your goal is to assist students and administrators. Be concise, empathetic, and professional. Greet the user and ask how you can help. The user's name is ${user?.name}.`,
+                    systemInstruction: `You are a friendly and helpful AI support agent for the university's STUDENT'S COMPLAINTS MANAGEMENT SYSTEM. Your goal is to assist students and administrators. Be concise, empathetic, and professional. Greet the user and ask how you can help. The user's name is ${user?.name}.`,
                 },
             });
 

@@ -1,5 +1,4 @@
-
-# CS Department Complaint Hub
+# STUDENT'S COMPLAINTS MANAGEMENT SYSTEM
 
 A sophisticated, fully-responsive, and feature-rich full-stack web application designed to streamline the complaint submission and resolution process for a university's Computer Science department. This project provides a transparent and efficient communication channel between students and administrators through dedicated, role-based dashboards.
 
@@ -26,7 +25,7 @@ The frontend is a comprehensive demonstration built with **React** and **TypeScr
 
 ## About The Project
 
-In any academic institution, timely and effective communication is key to student satisfaction and operational excellence. The **CS Department Complaint Hub** addresses the common challenge of managing student grievances, which can often be lost in emails, paperwork, or informal channels.
+In any academic institution, timely and effective communication is key to student satisfaction and operational excellence. The **STUDENT'S COMPLAINTS MANAGEMENT SYSTEM** addresses the common challenge of managing student grievances, which can often be lost in emails, paperwork, or informal channels.
 
 This application provides a centralized, digital platform where students can formally submit complaints regarding academics, facilities, administration, and more. Each submission is tracked with a unique ID, and its lifecycle is visible to both the student and the administration, ensuring transparency and accountability.
 

@@ -37,11 +37,11 @@ const LandingPage: React.FC = () => {
   return (
     <div className="text-center animate-fade-in">
       <div className="max-w-4xl mx-auto bg-white p-10 rounded-xl shadow-lg border border-gray-200">
-        <h2 className="text-4xl font-bold text-brand-primary mb-4">
-          CS Department Complaint Hub Login
+        <h2 className="text-4xl font-bold text-brand-primary mb-2">
+          STUDENT'S COMPLAINTS MANAGEMENT SYSTEM
         </h2>
-        <p className="text-lg text-gray-600 mb-10">
-          Please select your role to proceed.
+        <p className="text-xl text-gray-600 mb-10">
+          Select your role to log in
         </p>
         
         <div className="max-w-md mx-auto">

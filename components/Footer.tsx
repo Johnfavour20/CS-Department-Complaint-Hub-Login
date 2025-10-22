@@ -4,7 +4,7 @@ const Footer: React.FC = () => {
     return (
         <footer className="bg-white border-t border-gray-200 print:hidden">
             <div className="container mx-auto px-4 py-4 text-center text-gray-500">
-                <p>&copy; {new Date().getFullYear()} CS Department Complaint Hub. All Rights Reserved.</p>
+                <p>&copy; {new Date().getFullYear()} STUDENT'S COMPLAINTS MANAGEMENT SYSTEM. All Rights Reserved.</p>
                 <p className="text-sm mt-1">Fostering a responsive and accountable academic community.</p>
             </div>
         </footer>

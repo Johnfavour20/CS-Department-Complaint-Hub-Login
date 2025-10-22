@@ -3,7 +3,8 @@ import React from 'react';
 interface StatCardProps {
   title: string;
   value: string | number;
-  icon: React.ReactElement;
+  // FIX: Explicitly type the icon prop to accept a className, resolving the React.cloneElement overload error.
+  icon: React.ReactElement<{ className?: string }>;
   color?: string;
 }
 
