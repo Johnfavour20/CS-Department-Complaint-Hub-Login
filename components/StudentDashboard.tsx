@@ -4,18 +4,16 @@
 
 import React, { useState, useMemo } from 'react';
 import { Complaint, ComplaintStatus, ComplaintAttachment } from '../types';
-import { PlusIcon, MagnifyingGlassIcon, MicrophoneIcon } from './icons';
+import { PlusIcon, MagnifyingGlassIcon } from './icons';
 import ComplaintFormModal from './ComplaintFormModal';
 import ComplaintCard from './ComplaintCard';
 import { useComplaints } from '../contexts/ComplaintContext';
 import { useAuth } from '../contexts/AuthContext';
 import { useNotification } from '../contexts/NotificationContext';
 import ProfileView from './ProfileView';
-import LiveChatModal from './LiveChatModal';
 
 const StudentDashboard: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isLiveChatOpen, setIsLiveChatOpen] = useState(false);
   const { complaints, dispatch } = useComplaints();
   const { user } = useAuth();
   const { showNotification } = useNotification();
@@ -148,19 +146,6 @@ const StudentDashboard: React.FC = () => {
         onClose={() => setIsModalOpen(false)}
         onSubmit={handleAddComplaint}
       />
-
-        <button
-            onClick={() => setIsLiveChatOpen(true)}
-            className="fixed bottom-8 right-8 z-30 flex h-16 w-16 items-center justify-center rounded-full bg-brand-primary text-white shadow-lg transition-transform duration-300 hover:scale-110 hover:bg-brand-secondary focus:outline-none focus:ring-4 focus:ring-brand-secondary/50"
-            aria-label="Open Live Support Chat"
-        >
-            <MicrophoneIcon className="h-8 w-8" />
-        </button>
-
-        <LiveChatModal 
-            isOpen={isLiveChatOpen} 
-            onClose={() => setIsLiveChatOpen(false)} 
-        />
     </div>
   );
 };

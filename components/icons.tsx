@@ -122,33 +122,6 @@ export const MagnifyingGlassIcon: React.FC<IconProps> = (props) => (
     </svg>
 );
 
-// FIX: Added missing icons SparklesIcon, MicrophoneIcon, and StopIcon.
-export const SparklesIcon: React.FC<IconProps> = (props) => (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 6.75a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 1.5a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 6.75a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 14.25a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 19.5a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
-    </svg>
-);
-
-export const MicrophoneIcon: React.FC<IconProps> = (props) => (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M19 10v2a7 7 0 0 1-14 0v-2" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 19v4" />
-    </svg>
-);
-
-export const StopIcon: React.FC<IconProps> = (props) => (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M5.25 7.5A2.25 2.25 0 0 1 7.5 5.25h9a2.25 2.25 0 0 1 2.25 2.25v9a2.25 2.25 0 0 1-2.25 2.25h-9a2.25 2.25 0 0 1-2.25-2.25v-9Z" />
-    </svg>
-);
-
 export const XCircleIcon: React.FC<IconProps> = (props) => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
         <path strokeLinecap="round" strokeLinejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
@@ -195,7 +168,7 @@ export const Cog6ToothIcon: React.FC<IconProps> = (props) => (
 
 export const PrinterIcon: React.FC<IconProps> = (props) => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0 1 10.56 0m-10.56 0L6 18.233m0 0c.091.34.213.662.35.957m-1.35-1.687c-.273-.662-.586-1.28-.92-1.855m.92 1.855A25.338 25.338 0 0 1 3.75 12m.92 1.855 3.08-3.08m0 0a25.923 25.923 0 0 1 3.66-3.66m0 0c.625-.333 1.28-.586 1.944-.798m-1.944.798L8.522 5.022m0 0c.34.091.662.213.957.35m1.35 1.687c.273.662.586 1.28.92 1.855m-.92-1.855a25.338 25.338 0 0 0 3.66 3.66m0 0c-.625.333-1.28.586-1.944.798m1.944-.798L15.478 5.022m0 0c.34-.091.662-.213.957-.35m1.35 1.687c.273.662.586 1.28.92 1.855m-.92-1.855a25.338 25.338 0 0 0 3.66 3.66m0 0c-.625.333-1.28.586-1.944.798m1.944-.798L18.233 12m3.844-3.844a25.923 25.923 0 0 0-3.66-3.66m0 0c-.625-.333-1.28-.586-1.944-.798M16.5 3.75l-3.08 3.08" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0 1 10.56 0m-10.56 0L6 18.233m0 0c.091.34.213.662.35.957m-1.35-1.687c-.273-.662-.586-1.28-.92-1.855m.92 1.855A25.338 25.338 0 0 1 3.75 12m.92 1.855 3.08-3.08m0 0a25.923 25.923 0 0 1 3.66-3.66m0 0c.625-.333 1.28-.586 1.944-.798m-1.944.798L8.522 5.022m0 0c.34.091.662.213.957.35m1.35 1.687c.273.662.586 1.28.92 1.855m-.92-1.855a25.338 25.338 0 0 0 3.66 3.66m0 0c-.625.333-1.28.586-1.944.798m1.944-.798L15.478 5.022m0 0c.34-.091.662-.213.957.35m1.35 1.687c.273.662.586 1.28.92 1.855m-.92-1.855a25.338 25.338 0 0 0 3.66 3.66m0 0c-.625.333-1.28.586-1.944.798m1.944-.798L18.233 12m3.844-3.844a25.923 25.923 0 0 0-3.66-3.66m0 0c-.625-.333-1.28-.586-1.944-.798M16.5 3.75l-3.08 3.08" />
     </svg>
 );
 
@@ -215,4 +188,23 @@ export const ExclamationTriangleIcon: React.FC<IconProps> = (props) => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
     </svg>
+);
+
+// FIX: Added SparklesIcon, MicrophoneIcon, and StopIcon.
+export const SparklesIcon: React.FC<IconProps> = (props) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 21l5.25-11.25L21 21m-9-3.75h.008v.008H12v-.008zM3 10.5l5.25-11.25L13.5 10.5m-9-3.75h.008v.008H4.5v-.008z" />
+    </svg>
+);
+
+export const MicrophoneIcon: React.FC<IconProps> = (props) => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M12 18.75a6 6 0 0 0 6-6v-1.5m-6 7.5a6 6 0 0 1-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 0 1-3-3V4.5a3 3 0 0 1 6 0v8.25a3 3 0 0 1-3 3Z" />
+  </svg>
+);
+
+export const StopIcon: React.FC<IconProps> = (props) => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M5.25 7.5A2.25 2.25 0 0 1 7.5 5.25h9a2.25 2.25 0 0 1 2.25 2.25v9a2.25 2.25 0 0 1-2.25 2.25h-9a2.25 2.25 0 0 1-2.25-2.25v-9Z" />
+  </svg>
 );

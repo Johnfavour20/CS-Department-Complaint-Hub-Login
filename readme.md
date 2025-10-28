@@ -42,9 +42,7 @@ The goal is to create a more responsive academic environment by:
 ### For Students
 
 -   **Intuitive Complaint Submission:** A user-friendly modal form to submit complaints, complete with category selection and a detailed description field.
--   **AI-Powered Assistant:** An integrated Gemini AI assistant helps students draft clear, formal, and comprehensive complaint descriptions from simple keywords.
 -   **File Attachments:** Option to upload supporting documents, screenshots, or other files (up to 5MB) with a drag-and-drop interface.
--   **Live Voice Support:** A real-time voice chat feature powered by the Gemini Live API allows students to speak directly with an AI support agent for immediate assistance.
 -   **Real-time Tracking:** A clean dashboard lists all submitted complaints, with color-coded statuses for easy tracking (`Submitted`, `In Progress`, `Resolved`, `Closed`).
 -   **Detailed History View:** Students can expand each complaint to view its full history, including status changes, timestamps, and any notes added by the administrator.
 -   **Profile Management:** Students can view and edit their personal information and upload a custom profile picture.
@@ -75,7 +73,6 @@ The goal is to create a more responsive academic environment by:
 
 ### Frontend
 -   **Framework/Library:** [**React 19**](https://react.dev/) with [**TypeScript**](https://www.typescriptlang.org/) for building a scalable, type-safe, and component-based user interface.
--   **AI Integration:** [**Google Gemini API (@google/genai)**](https://ai.google.dev/docs) for the AI Complaint Assistant and the real-time Live Voice Chat support.
 -   **Styling:** [**Tailwind CSS**](https://tailwindcss.com/) for a modern, utility-first CSS workflow that enables rapid and responsive UI development.
 -   **State Management:** **React Context API** is used to manage global application state (Authentication, Complaints, Notifications).
 -   **Data Persistence:** Browser **`localStorage` API** acts as a lightweight client-side database for the frontend-only demo.

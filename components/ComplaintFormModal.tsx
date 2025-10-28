@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Complaint, ComplaintCategory, ComplaintAttachment } from '../types';
-import { XMarkIcon, DocumentIcon, PaperClipIcon, SparklesIcon } from './icons';
+import { XMarkIcon, DocumentIcon, PaperClipIcon } from './icons';
 import { useAuth } from '../contexts/AuthContext';
 import { useNotification } from '../contexts/NotificationContext';
-import AIComplaintAssistantModal from './AIComplaintAssistantModal';
 
 interface ComplaintFormModalProps {
   isOpen: boolean;
@@ -22,7 +21,6 @@ const ComplaintFormModal: React.FC<ComplaintFormModalProps> = ({ isOpen, onClose
   const [attachment, setAttachment] = useState<ComplaintAttachment | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [error, setError] = useState('');
-  const [isAIAssistantOpen, setIsAIAssistantOpen] = useState(false);
 
   useEffect(() => {
     if (isOpen) {
@@ -82,11 +80,6 @@ const ComplaintFormModal: React.FC<ComplaintFormModalProps> = ({ isOpen, onClose
       }
   }, [handleDragEvents]);
 
-  const handleApplyDescription = (newDescription: string) => {
-    setDescription(newDescription);
-    setIsAIAssistantOpen(false); // Also close the modal
-  };
-
   if (!isOpen) return null;
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -135,17 +128,7 @@ const ComplaintFormModal: React.FC<ComplaintFormModalProps> = ({ isOpen, onClose
                 </select>
             </div>
             <div>
-                <div className="flex justify-between items-center">
-                    <label htmlFor="description" className="block text-sm font-medium text-gray-700">Detailed Description</label>
-                    <button
-                        type="button"
-                        onClick={() => setIsAIAssistantOpen(true)}
-                        className="flex items-center space-x-1.5 text-sm text-brand-secondary font-semibold hover:text-brand-primary transition-colors p-1 rounded-md"
-                    >
-                        <SparklesIcon className="w-5 h-5" />
-                        <span>Generate with AI</span>
-                    </button>
-                </div>
+                <label htmlFor="description" className="block text-sm font-medium text-gray-700">Detailed Description</label>
                 <textarea
                 id="description"
                 rows={6}
@@ -203,11 +186,6 @@ const ComplaintFormModal: React.FC<ComplaintFormModalProps> = ({ isOpen, onClose
             </form>
         </div>
         </div>
-        <AIComplaintAssistantModal
-            isOpen={isAIAssistantOpen}
-            onClose={() => setIsAIAssistantOpen(false)}
-            onApplyDescription={handleApplyDescription}
-        />
     </>
   );
 };
